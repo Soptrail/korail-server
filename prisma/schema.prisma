@@ -11,7 +11,6 @@ model User {
   id       Int    @id(map: "user_pk") @unique(map: "user_id_uindex") @default(autoincrement())
   userName String
   age      Int?
-  email    String @db.VarChar(400)
 }
 
 model netflixMovie {
@@ -37,4 +36,19 @@ model reservation_ticket {
   LastDate   String  @db.VarChar(200)
   Personnel  Int
   content    String? @db.VarChar(500)
+}
+
+model ticketInformation {
+  id          Int    @id(map: "ticketInformation_pk") @unique @default(autoincrement())
+  TrainNumber Int
+  StartDate   String @db.VarChar(50)
+  content     String @db.VarChar(500)
+  Departures  String @db.VarChar(500)
+  Arrivals    String @db.VarChar(500)
+  StartTime   String @db.VarChar(500)
+  LastTime    String @db.VarChar(500)
+  TimeTaken   String @db.VarChar(500)
+  Station     Int
+  CarNumber   Int
+  Seat        Int
 }
