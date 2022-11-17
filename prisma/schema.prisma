@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id(map: "user_pk") @unique(map: "user_id_uindex") @default(autoincrement())
+  userName String
+  age      Int?
+  email    String @db.VarChar(400)
+}
+
+model netflixMovie {
+  id                Int      @id(map: "netflixMovie_pk") @unique @default(autoincrement())
+  title             String
+  image             String
+  iconImage         String
+  runningTime       Int
+  watchTime         Int
+  epiNum            Int
+  currentNum        Int
+  detail            String
+  character         String[]
+  genre             String[]
+  seriesDescription String
+}
+
+model reservation_ticket {
+  id         Int     @id @default(autoincrement())
+  Departures String  @db.VarChar(50)
+  Arrivals   String  @db.VarChar(50)
+  StartDate  String  @db.VarChar(200)
+  LastDate   String  @db.VarChar(200)
+  Personnel  Int
+  content    String? @db.VarChar(500)
+}
