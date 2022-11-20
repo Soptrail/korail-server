@@ -7,27 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       Int    @id(map: "user_pk") @unique(map: "user_id_uindex") @default(autoincrement())
-  userName String
-  age      Int?
-}
-
-model netflixMovie {
-  id                Int      @id(map: "netflixMovie_pk") @unique @default(autoincrement())
-  title             String
-  image             String
-  iconImage         String
-  runningTime       Int
-  watchTime         Int
-  epiNum            Int
-  currentNum        Int
-  detail            String
-  character         String[]
-  genre             String[]
-  seriesDescription String
-}
-
 model reservation_ticket {
   id         Int     @id @default(autoincrement())
   Departures String  @db.VarChar(50)
@@ -39,16 +18,35 @@ model reservation_ticket {
 }
 
 model ticketInformation {
-  id          Int    @id(map: "ticketInformation_pk") @unique @default(autoincrement())
-  TrainNumber Int
-  StartDate   String @db.VarChar(50)
-  content     String @db.VarChar(500)
-  Departures  String @db.VarChar(500)
   Arrivals    String @db.VarChar(500)
-  StartTime   String @db.VarChar(500)
-  LastTime    String @db.VarChar(500)
-  TimeTaken   String @db.VarChar(500)
-  Station     Int
   CarNumber   Int
+  Departures  String @db.VarChar(500)
+  LastTime    String @db.VarChar(500)
   Seat        Int
+  StartDate   String @db.VarChar(50)
+  StartTime   String @db.VarChar(500)
+  Station     Int
+  TimeTaken   String @db.VarChar(500)
+  TrainNumber Int
+  content     String @db.VarChar(500)
+  id          Int    @id(map: "ticketInformation_pk") @unique @default(autoincrement())
+}
+
+model trailInformation {
+  trailInformationId Int           @id @unique @default(autoincrement())
+  Departures         String        @db.VarChar(500)
+  Arrivals           String        @db.VarChar(500)
+  StartDate          String        @db.VarChar(50)
+  TrainInformation   Information[]
+}
+
+model Information {
+  id                 Int              @id @default(autoincrement())
+  TrainName          String           @db.VarChar(500)
+  StartTime          String           @db.VarChar(500)
+  LastTime           String           @db.VarChar(500)
+  NormalPrice        String           @db.VarChar(500)
+  SpecialPrice       String           @db.VarChar(500)
+  trailInformationId Int
+  trailInformation   trailInformation @relation(fields: [trailInformationId], references: [trailInformationId], onDelete: NoAction, onUpdate: NoAction, map: "trailInformationId")
 }

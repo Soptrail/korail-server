@@ -4,6 +4,6 @@ import { trailController } from "../controller";
 const router: Router = Router();
 
 router.get("/", trailController.getReservationTicket);
-router.get("/:ticketId", trailController.getTicketInformation);
+router.get("/:trailInformationId", trailController.getTrailInformationById);
 
 export default router;
